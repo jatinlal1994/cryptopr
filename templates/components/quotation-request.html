@@ -1,0 +1,56 @@
+<div id="quotation-request-modal" class="modal">
+	<div class="modal-vertical">
+		<div class="modal-container">
+			<div class="modal-box" id="request-quotation">
+				<div id="quotation-modal-header">
+					<div class="close-modal-button">
+						<i class="fas fa-times"></i>
+					</div>
+				</div>
+				<div id="quotation-request-modal-left">
+					<p class="quotation-title">Place order</p>
+					<ul>
+						 <todo-item v-for="item in quotationSteps" v-bind:todo="item" v-bind:key="item.id"></todo-item>
+					</ul>
+					<div id="total-amount">
+						<p class="amount-text">Total</p>
+						<p class="amount-value">{% verbatim %}{{ price }}{% endverbatim %} USD</p>
+					</div>
+				</div>
+				<div id="quotation-request-modal-right">
+					<div id="place-order-step">
+						<div class="step-icon">
+							<i v-bind:class="quotationSteps[currentStep].icon"></i>
+						</div>
+						<div class="step-short-desc">
+							<p>{% verbatim %}{{ quotationSteps[currentStep].shortDesc }}{% endverbatim %}</p>
+						</div>
+						<div class="step-fields">
+							<ul>
+								<li v-for="(field, obj) in quotationSteps[currentStep].fields" class="quotation-field" v-bind:data-name="field.id">
+									<div class="field-textarea" v-if="field.type == 'textarea'">
+										<textarea></textarea>
+										<label v-bind:data-label="field.label">{% verbatim %}{{  field.label }}{% endverbatim %}</label>
+									</div>
+									<div v-else>
+										<input v-bind:type="field.type" />
+										<label v-bind:data-label="field.label">{% verbatim %}{{  field.label }}{% endverbatim %}</label>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+					
+				</div>
+				<div id="quotation-modal-nav">
+					<div v-if="prev" class="quotation-modal-move left">
+						<button @click="moveBack" class="button">Back</button>
+					</div>
+					<div v-if="next" class="quotation-modal-move right">
+						<button @click="moveNext" class="button">Next</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

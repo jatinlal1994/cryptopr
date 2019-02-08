@@ -1,0 +1,9 @@
+body, div, p, a, ul, li, td, th{margin: 0;padding: 0;}
+div, p, a, input, textarea, button{font-family: "Poppins", sans-serif;}
+a{text-decoration: none;}
+li{list-style-type: none;}
+i, img{vertical-align: middle;}
+input, textarea, button, a{
+	&, &:hover, &:active, &:focus{outline: none;border: none;}
+}
+button{-moz-appearance: none;-webkit-appearance: none;}

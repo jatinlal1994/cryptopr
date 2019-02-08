@@ -1,0 +1,166 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>CryptoPress - Bringing you the most promising ICOs</title>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta name="theme-color" content="#000000" />
+		<meta name="keywords" content="cryptopress, cryptocurrency, ico services, initial coin offering" />
+		<meta name="description" content="" />
+		<meta itemprop="name" content="" />
+		<meta itemprop="description" content="" />
+		<meta itemprop="image" content="" />
+		<meta property="og:image" content="" />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content="" />
+		<meta property="og:title" content="" />
+		<meta property="og:description" content="" />
+		<meta name="twitter:card" content="summary" />
+		<meta name="twitter:site" content="" />
+		<meta name="twitter:title" content="" />
+		<meta name="twitter:description" content="" />
+		<meta name="twitter:creator" content="" />
+		<meta name="twitter:image" content="" />
+		<link rel="shortcut icon" href="" type="image/x-icon" />
+		<link rel="icon" href="" type="image/x-icon" />
+		<link rel="stylesheet" href="{% static 'css/public.css' %}" />
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+	</head>
+	<body>
+		<div id="nav">
+			<div class="container">
+				<div class="left">
+					<div id="logo">
+						<img src="{% static 'images/logo.jpg' %}">
+					</div>
+				</div>
+				<div class="right">
+					<ul>
+						<li>
+							<a href="#">News</a>
+						</li>
+						<li>
+							<a href="#">Packages</a>
+						</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+		{% block content %}{% endblock %}
+		<div id="footer">
+			<div class="container">
+				<div class="footer-desc">
+					<div id="footer-logo">
+						<img src="{% static 'images/logo.jpg' %}">
+					</div>
+					<div id="footer-text">
+						<p>Crypto Press is an ICO Marketing Company that widens your scope & credibility in the market by offering the best in class ICO Marketing Services with targeted ICO campaigns.</p>
+					</div>
+					<div class="social-links">
+						<div class="follow-text">
+							<p>Follow us on</p>
+						</div>
+						<div class="follow-icons">
+							<div class="icon">
+								<i class="fab fa-facebook-square"></i>
+							</div>
+							<div class="icon">
+								<i class="fab fa-twitter-square"></i>
+							</div>
+							<div class="icon">
+								<i class="fab fa-reddit-square"></i>
+							</div>
+							<div class="icon">
+								<i class="fab fa-linkedin"></i>
+							</div>
+							<div class="icon"></div>
+						</div>
+					</div>
+					<div class="payment-addresses">
+						<div class="payment-info">
+							<p>You can make any payment required using our website, or you can pay to any of the addresses shown below. Please note that none of our member will contact you to pay to any address other than these.</p>
+						</div>
+						<div class="address">
+							<ul>
+								<li>
+									<p>BTC Address :
+										<span>0x65ee73bb9ba86285babdfa4058be689ae754a67a</span>
+									</p>
+								</li>
+								<li>
+									<p>ETH Address :
+										<span>0x65ee73bb9ba86285babdfa4058be689ae754a67a</span></p>
+									</li>
+								<li>
+									<p>XRP Address :
+										<span>0x65ee73bb9ba86285babdfa4058be689ae754a67a</span>
+									</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<div class="other-links">
+						<ul>
+							<li><a href="{% url 'privacy-policy' %}">Privacy Policy</a></li>
+							<li><p></p></li>
+							<li><a href="{% url 'tandc' %}">Terms and Conditions</a></li>
+							<li><p></p></li>
+							<li><a href="{% url 'disclaimer' %}">Disclaimer</a></li>
+						</ul>
+					</div>
+				</div>
+				<div class="ask-form">
+					<div class="form-header">
+						<p>Submit</p>
+					</div>
+					<div class="ask-form-box">
+						<div class="form-fields">
+							<div class="form-field">
+								<input type="text">
+								<label>Your name</label>
+							</div>
+							<div class="form-field">
+								<input type="text">
+								<label>Your Email</label>
+							</div>
+							<div class="form-field">
+								<input type="text">
+								<label>Personal Telegram ID</label>
+							</div>
+							<div class="form-field">
+								<input type="text">
+								<label>Project Name</label>
+							</div>
+							<div class="form-field">
+								<input type="text">
+								<label>White paper link</label>
+							</div>
+							<div class="form-submit">
+								<input type="submit">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer-copy">
+		<div class="container">
+			<div class="left">
+				<p>
+					<i class="far fa-copyright"></i> Cryptopress | 2018 - 2019 | All rights reserved
+				</p>
+			</div>
+			<div class="right">
+				<a href="mail-to:contact@cryptopress.us">contact@cryptopress.us</a>
+			</div>
+		</div>
+	</div>
+	{% include 'components/quotation-request.html' %}
+	<script src="{% static 'js/vue.js' %}"></script>
+	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+	<script src="{% static 'js/public.js' %}"></script>
+	</body>
+</html>
