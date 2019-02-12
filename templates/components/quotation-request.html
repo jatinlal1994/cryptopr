@@ -14,7 +14,7 @@
 					</ul>
 					<div id="total-amount">
 						<p class="amount-text">Total</p>
-						<p class="amount-value">{% verbatim %}{{ price }}{% endverbatim %} USD</p>
+						<p class="amount-value">{% verbatim %}{{ price }}{% endverbatim %} ETH</p>
 					</div>
 				</div>
 				<div id="quotation-request-modal-right">
@@ -25,29 +25,53 @@
 						<div class="step-short-desc">
 							<p>{% verbatim %}{{ quotationSteps[currentStep].shortDesc }}{% endverbatim %}</p>
 						</div>
+						<div class="payment-form" v-if="currentStep == quotationSteps.length - 1">
+							<div class="payment-basic">
+								<p>Please pay {% verbatim %}{{ price }}{% endverbatim %} ETH to the address provided in the bottom of the page, or you can scan the barcode below. After payment, you will have to paste the transaction ID in the form below.</p>
+								<div class="qr-row">
+									<div class="qr">
+										<img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl= 0x65ee73bb9ba86285babdfa4058be689ae754a67a">
+										<p>BTC Address</p>
+									</div>
+									<div class="qr">
+										<img src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl= 0x65ee73bb9ba86285babdfa4058be689ae754a67a">
+										<p>ETH Address</p>
+									</div>									
+								</div>
+							</div>
+						</div>
 						<div class="step-fields">
 							<ul>
 								<li v-for="(field, obj) in quotationSteps[currentStep].fields" class="quotation-field" v-bind:data-name="field.id">
 									<div class="field-textarea" v-if="field.type == 'textarea'">
-										<textarea></textarea>
+										<textarea v-model="short_description"></textarea>
 										<label v-bind:data-label="field.label">{% verbatim %}{{  field.label }}{% endverbatim %}</label>
 									</div>
+									<div class="field-checkbox" v-else-if="field.type == 'checkbox'">
+										<input @click="changeCheck" type="checkbox" v-bind:value="field.name" v-bind:id="field.name" v-model="social_medias_selected">
+										<label v-bind:for="field.name"></label>
+										<p>{% verbatim %}{{  field.label }}{% endverbatim %}
+											<span v-if="field.price">{% verbatim %}{{  field.price }}{% endverbatim %} ETH</span>
+										</p>
+									</div>
 									<div v-else>
-										<input v-bind:type="field.type" />
+										<input v-bind:type="field.type" v-model="values[obj]" />
 										<label v-bind:data-label="field.label">{% verbatim %}{{  field.label }}{% endverbatim %}</label>
 									</div>
 								</li>
 							</ul>
 						</div>
 					</div>
-					
 				</div>
 				<div id="quotation-modal-nav">
 					<div v-if="prev" class="quotation-modal-move left">
 						<button @click="moveBack" class="button">Back</button>
 					</div>
-					<div v-if="next" class="quotation-modal-move right">
+					<div v-if="currentStep < quotationSteps.length - 1" class="quotation-modal-move right">
 						<button @click="moveNext" class="button">Next</button>
+					</div>
+					<div v-if="currentStep == quotationSteps.length - 1" class="quotation-modal-move right">
+						<button @click="submitForm" class="button">Submit</button>
 					</div>
 				</div>
 			</div>

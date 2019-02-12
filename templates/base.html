@@ -2,13 +2,13 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>CryptoPress - Bringing you the most promising ICOs</title>
+		<title>{% block title %}{% endblock %}</title>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<meta name="theme-color" content="#000000" />
+		<meta name="theme-color" content="#2C3E50" />
 		<meta name="keywords" content="cryptopress, cryptocurrency, ico services, initial coin offering" />
-		<meta name="description" content="" />
+		<meta name="description" content="{% block description %}{% endblock %}" />
 		<meta itemprop="name" content="" />
 		<meta itemprop="description" content="" />
 		<meta itemprop="image" content="" />
@@ -23,8 +23,8 @@
 		<meta name="twitter:description" content="" />
 		<meta name="twitter:creator" content="" />
 		<meta name="twitter:image" content="" />
-		<link rel="shortcut icon" href="" type="image/x-icon" />
-		<link rel="icon" href="" type="image/x-icon" />
+		<link rel="shortcut icon" href="{% static 'images/favicon.png' %}" type="image/x-icon" />
+		<link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon" />
 		<link rel="stylesheet" href="{% static 'css/public.css' %}" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
 	</head>
@@ -33,7 +33,7 @@
 			<div class="container">
 				<div class="left">
 					<div id="logo">
-						<img src="{% static 'images/logo.jpg' %}">
+						<a href="{% url 'home' %}"><img src="{% static 'images/logo.jpg' %}"></a>
 					</div>
 				</div>
 				<div class="right">
@@ -108,6 +108,8 @@
 							<li><a href="{% url 'tandc' %}">Terms and Conditions</a></li>
 							<li><p></p></li>
 							<li><a href="{% url 'disclaimer' %}">Disclaimer</a></li>
+							<li><p></p></li>
+							<li><a href="https://t.me/peter">Contact on <i class="fab fa-telegram-plane"></i> Telegram</a></li>
 						</ul>
 					</div>
 				</div>
@@ -160,6 +162,7 @@
 	</div>
 	{% include 'components/quotation-request.html' %}
 	<script src="{% static 'js/vue.js' %}"></script>
+	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
 	<script src="{% static 'js/public.js' %}"></script>
 	</body>
