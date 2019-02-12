@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'public',
 ]
 
 MIDDLEWARE = [
@@ -27,9 +28,10 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
+    
 ]
 
-HTML_MINIFY = True
+HTML_MINIFY = False
 
 ROOT_URLCONF = 'cryptopress.urls'
 
