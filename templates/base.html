@@ -7,7 +7,7 @@
 		<meta http-equiv="X-UA-Compatible" content="ie=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<meta name="theme-color" content="#2C3E50" />
-		<meta name="keywords" content="cryptopress, cryptocurrency, ico services, initial coin offering" />
+		<meta name="keywords" content="cryptopr, crypto pr, cryptopr.us, launch an ico, " />
 		<meta name="description" content="{% block description %}{% endblock %}" />
 		<meta itemprop="name" content="" />
 		<meta itemprop="description" content="" />
@@ -58,22 +58,30 @@
 					<div id="footer-text">
 						<p>Crypto Press is an ICO Marketing Company that widens your scope & credibility in the market by offering the best in class ICO Marketing Services with targeted ICO campaigns.</p>
 					</div>
-					<div class="social-links">
+					<div class="footer-foot">
 						<div class="follow-text">
 							<p>Follow us on</p>
 						</div>
 						<div class="follow-icons">
 							<div class="icon">
-								<i class="fab fa-facebook-square"></i>
+								<a href="#" target="_blank">
+									<i class="fab fa-facebook-square"></i>
+								</a>
 							</div>
 							<div class="icon">
-								<i class="fab fa-twitter-square"></i>
+								<a href="#" target="_blank">
+									<i class="fab fa-twitter-square"></i>
+								</a>
 							</div>
 							<div class="icon">
-								<i class="fab fa-reddit-square"></i>
+								<a href="#" target="_blank">
+									<i class="fab fa-reddit-square"></i>
+								</a>
 							</div>
 							<div class="icon">
-								<i class="fab fa-linkedin"></i>
+								<a href="#" target="_blank">
+									<i class="fab fa-linkedin"></i>
+								</a>
 							</div>
 							<div class="icon"></div>
 						</div>
@@ -86,12 +94,12 @@
 							<ul>
 								<li>
 									<p>BTC Address :
-										<span>1LWVQw8H1fEuK5DWtT1wU36JRxjj91iLHS</span>
+										<span>18ufvR1ga4ousSTwhwQi7W6UpvqvzLuRgf</span>
 									</p>
 								</li>
 								<li>
 									<p>ETH Address :
-										<span>0x04c44798Bd4AfC5605e9bF67Ce740E34b3Bf3d2e</span>
+										<span>0x7910943abaef5cf521d5793708b7b558f6ace258</span>
 									</p>
 								</li>
 							</ul>
@@ -105,7 +113,7 @@
 							<li><p></p></li>
 							<li><a href="{% url 'disclaimer' %}">Disclaimer</a></li>
 							<li><p></p></li>
-							<li><a href="https://t.me/peter">Contact on <i class="fab fa-telegram-plane"></i> Telegram</a></li>
+							<li><a href="https://t.me/cryptoprofficial">Contact on <i class="fab fa-telegram-plane"></i> Telegram</a></li>
 						</ul>
 					</div>
 				</div>
@@ -115,29 +123,32 @@
 					</div>
 					<div class="ask-form-box">
 						<div class="form-fields">
-							<div class="form-field">
-								<input type="text">
-								<label>Your name</label>
-							</div>
-							<div class="form-field">
-								<input type="text">
-								<label>Your Email</label>
-							</div>
-							<div class="form-field">
-								<input type="text">
-								<label>Personal Telegram ID</label>
-							</div>
-							<div class="form-field">
-								<input type="text">
-								<label>Project Name</label>
-							</div>
-							<div class="form-field">
-								<input type="text">
-								<label>White paper link</label>
-							</div>
-							<div class="form-submit">
-								<input type="submit">
-							</div>
+							<form action="{% url 'contact-request' %}" method="post">
+								{% csrf_token %}
+								<div class="form-field">
+									<input name="name" type="text" required>
+									<label>Your name</label>
+								</div>
+								<div class="form-field">
+									<input name="email" type="email" required>
+									<label>Your Email</label>
+								</div>
+								<div class="form-field">
+									<input name="telegram-id" type="text" required>
+									<label>Personal Telegram ID</label>
+								</div>
+								<div class="form-field">
+									<input name="project-name" type="text" required>
+									<label>Project Name</label>
+								</div>
+								<div class="form-field">
+									<input name="white-paper" type="text" required>
+									<label>White paper link</label>
+								</div>
+								<div class="form-submit">
+									<input type="submit">
+								</div>
+							</form>
 						</div>
 					</div>
 				</div>
@@ -148,14 +159,19 @@
 		<div class="container">
 			<div class="left">
 				<p>
-					<i class="far fa-copyright"></i> Cryptopress | 2018 - 2019 | All rights reserved
+					<i class="far fa-copyright"></i> CryptoPR | 2018 - 2019 | All rights reserved
 				</p>
 			</div>
 			<div class="right">
-				<a href="mail-to:contact@cryptopress.us">contact@cryptopress.us</a>
+				<a href="mail-to:contact@cryptopress.us">admin@cryptopr.us</a>
 			</div>
 		</div>
 	</div>
+	{% for message in messages %}
+	<div class="success-message" role="alert">
+		{{ message }}
+	</div>
+	{% endfor %}
 	{% include 'components/quotation-request.html' %}
 	<script src="{% static 'js/vue.js' %}"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>

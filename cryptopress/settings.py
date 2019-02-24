@@ -28,8 +28,13 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'htmlmin.middleware.HtmlMinifyMiddleware',
     'htmlmin.middleware.MarkRequestMiddleware',
-    
 ]
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.privateeemail.com'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = 'admin@cryptopr.us'
+EMAIL_HOST_PASSWORD = 'password'
 
 HTML_MINIFY = False
 

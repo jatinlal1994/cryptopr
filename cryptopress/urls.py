@@ -10,4 +10,6 @@ urlpatterns = [
     path('terms-and-conditions', public.tandc, name='tandc'),
     path('disclaimer', public.disclaimer, name='disclaimer'),
     path('submit-form', public.submitForm, name="submit-form"),
+
+    path('contact-request', public.contactRequest, name='contact-request'),
 ]
