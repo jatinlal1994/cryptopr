@@ -25,3 +25,19 @@ class IcoRequest(models.Model):
 
 	def __str__(self):
 		return str(self.session_id)
+
+class PackageOrder(models.Model):
+	id = models.AutoField(primary_key = True)
+	project_name = models.CharField(max_length = 200)
+	token_symbol = models.CharField(max_length = 100)
+	website = models.CharField(max_length = 150)
+	telegram_contact = models.CharField(max_length = 150)
+	facebook = models.CharField(max_length = 200)
+	twitter = models.CharField(max_length = 200)
+	telegram = models.CharField(max_length = 200)
+	linkedin = models.CharField(max_length = 200)
+	reddit = models.CharField(max_length = 200)
+	youtube = models.CharField(max_length = 200)
+
+	def __str__(self):
+		return self.project_name + " - " + self.token_symbol
