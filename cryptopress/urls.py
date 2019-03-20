@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 
 from public import views as public
-
+test
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', public.public, name='home'),
