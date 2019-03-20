@@ -27,6 +27,8 @@
 		<link rel="icon" href="{% static 'images/favicon.png' %}" type="image/x-icon" />
 		<link rel="stylesheet" href="{% static 'css/public.css' %}" />
 		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css">
+		<script src="https://cdn.bootcss.com/qs/6.6.0/qs.min.js"></script>
+	
 	</head>
 	<body>
 		<div id="nav">
@@ -39,10 +41,10 @@
 				<div class="right">
 					<ul>
 						<li>
-							<a href="#">News</a>
+							<a href="#" class="scroll-to" data-scroll-target="features-section">Services</a>
 						</li>
 						<li>
-							<a href="#">Packages</a>
+							<a href="#" class="scroll-to" data-scroll-target="numbers-section">Packages</a>
 						</li>
 					</ul>
 				</div>
@@ -56,9 +58,9 @@
 						<img src="{% static 'images/logo.jpg' %}">
 					</div>
 					<div id="footer-text">
-						<p>Crypto Press is an ICO Marketing Company that widens your scope & credibility in the market by offering the best in class ICO Marketing Services with targeted ICO campaigns.</p>
+						<p>Crypto PR is an ICO Marketing Company that widens your scope & credibility in the market by offering the best in class ICO Marketing Services with targeted ICO campaigns.</p>
 					</div>
-					<div class="footer-foot">
+					<!--<div class="footer-foot">
 						<div class="follow-text">
 							<p>Follow us on</p>
 						</div>
@@ -85,7 +87,7 @@
 							</div>
 							<div class="icon"></div>
 						</div>
-					</div>
+					</div>-->
 					<div class="payment-addresses">
 						<div class="payment-info">
 							<p>You can make any payment required using our website, or you can pay to any of the addresses shown below. Please note that none of our member will contact you to pay to any address other than these.</p>
@@ -107,43 +109,33 @@
 					</div>
 					<div class="other-links">
 						<ul>
-							<li><a href="{% url 'privacy-policy' %}">Privacy Policy</a></li>
-							<li><p></p></li>
-							<li><a href="{% url 'tandc' %}">Terms and Conditions</a></li>
-							<li><p></p></li>
-							<li><a href="{% url 'disclaimer' %}">Disclaimer</a></li>
-							<li><p></p></li>
-							<li><a href="https://t.me/cryptoprofficial">Contact on <i class="fab fa-telegram-plane"></i> Telegram</a></li>
+							<li><i class="fas fa-scroll"></i><a href="{% url 'privacy-policy' %}">Privacy Policy</a></li>
+							<li><i class="fas fa-toilet-paper"></i><a href="{% url 'tandc' %}">Terms and Conditions</a></li>
+							<li><i class="fas fa-file-alt"></i><a href="{% url 'disclaimer' %}">Disclaimer</a></li> 
+							<li><i class="fab fa-telegram-plane"></i><a>Contact on Telegram</a></li>
 						</ul>
 					</div>
 				</div>
 				<div class="ask-form">
-					<div class="form-header">
-						<p>Submit</p>
-					</div>
 					<div class="ask-form-box">
 						<div class="form-fields">
 							<form action="{% url 'contact-request' %}" method="post">
 								{% csrf_token %}
 								<div class="form-field">
-									<input name="name" type="text" required>
+									<input placeholder="Full name" name="name" type="text" required>
 									<label>Your name</label>
 								</div>
 								<div class="form-field">
-									<input name="email" type="email" required>
+									<input placeholder="Email ID" name="email" type="email" required>
 									<label>Your Email</label>
 								</div>
 								<div class="form-field">
-									<input name="telegram-id" type="text" required>
-									<label>Personal Telegram ID</label>
-								</div>
-								<div class="form-field">
-									<input name="project-name" type="text" required>
+									<input placeholder="Project name" name="project-name" type="text" required>
 									<label>Project Name</label>
 								</div>
 								<div class="form-field">
-									<input name="white-paper" type="text" required>
-									<label>White paper link</label>
+									<input placeholder="Telegram ID" name="telegram-id" type="text" required>
+									<label>Personal Telegram ID</label>
 								</div>
 								<div class="form-submit">
 									<input type="submit">
@@ -163,9 +155,12 @@
 				</p>
 			</div>
 			<div class="right">
-				<a href="mail-to:contact@cryptopress.us">admin@cryptopr.us</a>
+				<a href="mail-to:admin@cryptopr.us">admin@cryptopr.us</a>
 			</div>
 		</div>
+	</div>
+	<div id="scroll-to-top">
+		<i class="fas fa-arrow-up"></i>
 	</div>
 	{% for message in messages %}
 	<div class="success-message" role="alert">
@@ -176,6 +171,7 @@
 	<script src="{% static 'js/vue.js' %}"></script>
 	<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 	<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-	<script src="{% static 'js/public.js' %}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/2.0.2/anime.min.js"></script>
+	<script src="{% static 'js/index.js' %}"></script>
 	</body>
 </html>

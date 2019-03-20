@@ -8,6 +8,15 @@
 		}, 10);
 	}
 
+	document.getElementById('buy-using-bitcoin-button').onclick = function(event){
+		event.preventDefault();
+		document.getElementById('buy-using-bitcoin').style.display = "table";
+		setTimeout(function(){
+			document.getElementById('buy-using-bitcoin').classList.add('opened');
+			document.getElementsByTagName("BODY")[0].style.overflowY = 'hidden';
+		}, 10);
+	}
+
 	step = 0;
 
 	Vue.component('todo-item', {
@@ -65,6 +74,7 @@
 		}
 	});
 
+	console.log("Loaded website");
 
 	var quotation_steps = new Vue({
 		el: '#request-quotation',
@@ -313,6 +323,9 @@
 }
 )();
 
+document.getElementById('buy-btc').onclick = function(event) {
+	
+}
 
 document.getElementById('close-quotation-success').onclick = function(event){
 	document.getElementById('submitted-form').style.display = "none";
@@ -326,8 +339,97 @@ for (close_button of document.getElementsByClassName('close-modal-button')){
 		setTimeout(function(){
 			modal_box.style.display = "none";
 			document.getElementsByTagName("BODY")[0].style.overflowY = 'auto';
+			for (package_field of document.getElementsByClassName('package-field')){
+				package_field.value = "";
+			}
 		}, 500);
 	}
+}
+
+for (scroll_to of document.getElementsByClassName('scroll-to')){
+	scroll_to.onclick = function(event) {
+		event.preventDefault();
+		window.scrollTo(0, document.getElementById(this.dataset.scrollTarget).getBoundingClientRect().top - 20);
+	}
+}
+
+document.getElementById('scroll-to-top').onclick = function(event) {
+	window.scrollTo(0, 0);
+}
+
+document.getElementById('buy-bitcoin').onclick = function(event) {
+
+}
+
+window.onscroll = function(event) {
+	top = document.documentElement.scrollTop;
+	if (document.documentElement.scrollTop < 1){
+		document.getElementById('scroll-to-top').classList.add('hidden');
+	}
+	else{
+		document.getElementById('scroll-to-top').classList.remove('hidden');		
+	}
+}
+
+document.getElementById('buy-bitcoin').onclick = function(event) {
+	filled = true;
+	for (package_field of document.getElementsByClassName('package-field')){
+		if (package_field.value == "") {
+			filled = false;
+		}
+	}
+	if (filled) {
+		document.getElementById('package-submit-error').style.display = "none";
+		document.getElementById('buy-preloader').style.display = 'block';
+
+		package_project_name = document.getElementById('package-project-name').value;
+		package_token_symbol = document.getElementById('package-token-symbol').value;
+		package_website = document.getElementById('package-project-website').value;
+		package_telegram_username = document.getElementById('package-telegram-username').value;
+		package_facebook = document.getElementById('package-facebook').value;
+		package_twitter = document.getElementById('package-twitter').value;
+		package_telegram = document.getElementById('package-telegram').value;
+		package_linkedin = document.getElementById('package-linkedin').value;
+		package_reddit = document.getElementById('package-reddit').value;
+		package_youtube = document.getElementById('package-youtube').value;
+
+		axios.post('/package-request', {
+			project_name: package_project_name,
+			token_symbol: package_token_symbol,
+			website: package_website,
+			telegram_contact: package_telegram_username,
+			facebook: package_facebook,
+			twitter: package_twitter,
+			telegram: package_telegram,
+			linkedin: package_linkedin,
+			reddit: package_reddit,
+			youtube: package_youtube,
+			number: 24
+		})
+		.then(function (response) {
+			document.getElementById('buy-preloader').style.display = 'none';
+			if (response.data.status) {
+				document.getElementById('buy-package-box').style.display = 'table';
+				document.getElementById('buy-package-success').innerHTML = "Your response has been succesfully saved. We will shortly contact <span>" + response.data.telegram_contact + "</span> from <span>" + response.data.project_name + "</span>.";
+				setTimeout(function() {
+					document.getElementById('buy-package-box').classList.add('showing');
+				}, 10);
+			}
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+	}
+	else {
+		document.getElementById('package-submit-error').style.display = "block";
+	}
+}
+
+document.getElementById('cancel-package-payment').onclick = function(event) {
+	document.getElementById('buy-package-box').classList.remove('showing');
+	setTimeout(function() {
+		document.getElementById('buy-package-box').style.display = 'none';
+	}, 510);
 }
 
 particlesJS("banner-particles", {"particles":{"number":{"value":6,"density":{"enable":true,"value_area":800}},"color":{"value":"#888888"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000"},"polygon":{"nb_sides":6},"image":{"src":"img/github.svg","width":20,"height":20}},"opacity":{"value":0.3,"random":true,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":90.75197878771135,"random":false,"anim":{"enable":true,"speed":10,"size_min":40,"sync":false}},"line_linked":{"enable":false,"distance":200,"color":"#ffffff","opacity":1,"width":2},"move":{"enable":true,"speed":8,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":false,"mode":"grab"},"onclick":{"enable":false,"mode":"push"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":400,"size":40,"duration":2,"opacity":8,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});
