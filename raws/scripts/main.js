@@ -21,23 +21,25 @@
 
 	Vue.component('todo-item', {
 		props: ['todo'],
-		template: '<li v-bind:data-active="todo.active" @click="move(todo.id)" v-bind:data-step="todo.step"><i v-bind:class="todo.icon"></i><p>{{ todo.text }}</p></li>',
+		template: '<li v-bind:data-active="todo.active" ' + /*@click="move(todo.id)"*/"" + 'v-bind:data-step="todo.step"><i v-bind:class="todo.icon"></i><p>{{ todo.text }}</p></li>',
 		methods: {
 			move: function(id) {
-				target = document.getElementById('quotation-request-modal-right');
-				target.classList.add('changing');
-				setTimeout(function(){
-					quotation_steps.$data.quotationSteps[quotation_steps.$data.currentStep].active = false;
-					quotation_steps.$data.currentStep = id;
-					quotation_steps.$data.quotationSteps[quotation_steps.$data.currentStep].active = true;
-					if (id == 0) {
-						quotation_steps.$data.prev = false;
-					}
-					else{
-						quotation_steps.$data.prev = true;
-					}
-					target.classList.remove('changing');
-				}, 250);
+				if ( quotation_steps.$data.currentStep != id ){
+					target = document.getElementById('quotation-request-modal-right');
+					target.classList.add('changing');
+					setTimeout(function(){
+						quotation_steps.$data.quotationSteps[quotation_steps.$data.currentStep].active = false;
+						quotation_steps.$data.currentStep = id;
+						quotation_steps.$data.quotationSteps[quotation_steps.$data.currentStep].active = true;
+						if (id == 0) {
+							quotation_steps.$data.prev = false;
+						}
+						else{
+							quotation_steps.$data.prev = true;
+						}
+						target.classList.remove('changing');
+					}, 250);
+				}
 			}
 		}
 	});
@@ -74,8 +76,6 @@
 		}
 	});
 
-	console.log("Loaded website");
-
 	var quotation_steps = new Vue({
 		el: '#request-quotation',
 		data: {
@@ -106,9 +106,6 @@
 						},
 						{
 							'id': 3, 'name': 'contact-email', 'model': 'contact_email', 'type': 'email', 'label': 'Contact Email'
-						},
-						{
-							'id': 4, 'name': 'short-description', 'model': 'short_description', 'type': 'textarea', 'label': 'Short Description'
 						}
 					]
 				},
@@ -224,21 +221,45 @@
 		methods: {
 			moveNext: function(event) {
 				ref = this;
-				if (ref.$data.currentStep < ref.$data.quotationSteps.length - 1){
-					target = document.getElementById('quotation-request-modal-right');
-					target.classList.add('changing');
-					setTimeout(function(){
-						ref.$data.currentStep += 1;
-						ref.$data.quotationSteps[ref.$data.currentStep].active = true;
-						ref.$data.quotationSteps[ref.$data.currentStep - 1].active = false;
-						if (ref.$data.currentStep > 0) {
-							ref.$data.prev = true;
-						}
-						if (ref.$data.currentStep == ref.$data.quotationSteps.length) {
-							ref.$data.next = false;
-						}
-						target.classList.remove('changing');
-					}, 250);
+
+				if (ref.$data.currentStep == 0) {
+					console.log("On first step, checking first box");
+					complete = true;
+					if (document.getElementById('project-name').value == ""){
+						document.getElementById('project-name').style.border = "1px solid red";
+						complete = false;
+					}
+					if (document.getElementById('project-website').value == ""){
+						document.getElementById('project-website').style.border = "1px solid red";
+						complete = false;
+					}
+					if (document.getElementById('contact-name').value == ""){
+						document.getElementById('contact-name').style.border = "1px solid red";
+						complete = false;
+					}
+					if (document.getElementById('contact-email').value == ""){
+						document.getElementById('contact-email').style.border = "1px solid red";
+						complete = false;
+					}
+
+				}
+				if (complete){
+					if (ref.$data.currentStep < ref.$data.quotationSteps.length - 1){
+						target = document.getElementById('quotation-request-modal-right');
+						target.classList.add('changing');
+						setTimeout(function(){
+							ref.$data.currentStep += 1;
+							ref.$data.quotationSteps[ref.$data.currentStep].active = true;
+							ref.$data.quotationSteps[ref.$data.currentStep - 1].active = false;
+							if (ref.$data.currentStep > 0) {
+								ref.$data.prev = true;
+							}
+							if (ref.$data.currentStep == ref.$data.quotationSteps.length) {
+								ref.$data.next = false;
+							}
+							target.classList.remove('changing');
+						}, 250);
+					}
 				}
 			},
 			moveBack: function(event) {
@@ -379,49 +400,70 @@ document.getElementById('buy-bitcoin').onclick = function(event) {
 		}
 	}
 	if (filled) {
-		document.getElementById('package-submit-error').style.display = "none";
-		document.getElementById('buy-preloader').style.display = 'block';
+		var response = grecaptcha.getResponse();
 
-		package_project_name = document.getElementById('package-project-name').value;
-		package_token_symbol = document.getElementById('package-token-symbol').value;
-		package_website = document.getElementById('package-project-website').value;
-		package_telegram_username = document.getElementById('package-telegram-username').value;
-		package_facebook = document.getElementById('package-facebook').value;
-		package_twitter = document.getElementById('package-twitter').value;
-		package_telegram = document.getElementById('package-telegram').value;
-		package_linkedin = document.getElementById('package-linkedin').value;
-		package_reddit = document.getElementById('package-reddit').value;
-		package_youtube = document.getElementById('package-youtube').value;
+		if(response.length == 0){
+			console.log("Recaptcha not solved");
+			document.getElementById('recaptcha-error').style.display = "block";
+		}
+		else{
+			document.getElementById('package-submit-error').style.display = "none";
+			document.getElementById('buy-preloader').style.display = 'block';
 
-		axios.post('/package-request', {
-			project_name: package_project_name,
-			token_symbol: package_token_symbol,
-			website: package_website,
-			telegram_contact: package_telegram_username,
-			facebook: package_facebook,
-			twitter: package_twitter,
-			telegram: package_telegram,
-			linkedin: package_linkedin,
-			reddit: package_reddit,
-			youtube: package_youtube,
-			number: 24
-		})
-		.then(function (response) {
-			document.getElementById('buy-preloader').style.display = 'none';
-			if (response.data.status) {
-				document.getElementById('buy-package-box').style.display = 'table';
-				document.getElementById('buy-package-success').innerHTML = "Your response has been succesfully saved. We will shortly contact <span>" + response.data.telegram_contact + "</span> from <span>" + response.data.project_name + "</span>.";
-				setTimeout(function() {
-					document.getElementById('buy-package-box').classList.add('showing');
-				}, 10);
-			}
-		})
-		.catch(function (error) {
-			console.log(error);
-		});
+			package_project_name = document.getElementById('package-project-name').value;
+			package_token_symbol = document.getElementById('package-token-symbol').value;
+			package_website = document.getElementById('package-project-website').value;
+			package_telegram_username = document.getElementById('package-telegram-username').value;
+			package_facebook = document.getElementById('package-facebook').value;
+			package_twitter = document.getElementById('package-twitter').value;
+			package_telegram = document.getElementById('package-telegram').value;
+			package_linkedin = document.getElementById('package-linkedin').value;
+			package_reddit = document.getElementById('package-reddit').value;
+			package_youtube = document.getElementById('package-youtube').value;
+			document.getElementById('recaptcha-error').style.display = "none";
+			axios.post('/package-request', {
+				project_name: package_project_name,
+				token_symbol: package_token_symbol,
+				website: package_website,
+				telegram_contact: package_telegram_username,
+				facebook: package_facebook,
+				twitter: package_twitter,
+				telegram: package_telegram,
+				linkedin: package_linkedin,
+				reddit: package_reddit,
+				youtube: package_youtube,
+				number: 24
+			})
+			.then(function (response) {
+				document.getElementById('buy-preloader').style.display = 'none';
+				if (response.data.status) {
+					document.getElementById('buy-package-box').style.display = 'table';
+					document.getElementById('buy-package-success').innerHTML = "Your response has been succesfully saved. The reference ID for your response is <span>" + response.data.reference + "</span>.<br><br>We will shortly contact <span>@" + response.data.telegram_contact + "</span> from <span>" + response.data.project_name + "</span> for getting rest details and discussion about planning of delivery of services.";
+					setTimeout(function() {
+						document.getElementById('buy-package-box').classList.add('showing');
+					}, 10);
+				}
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+		}
+
+		
 	}
 	else {
 		document.getElementById('package-submit-error').style.display = "block";
+	}
+}
+
+for (close_payment of document.getElementsByClassName('close-payment-modal')){
+	close_payment.onclick = function(event) {
+		event.preventDefault();
+		this.parentNode.classList.remove('showing');
+		selected = this;
+		setTimeout(function(){
+			selected.parentNode.style.display = "none";
+		}, 260);
 	}
 }
 
@@ -430,6 +472,41 @@ document.getElementById('cancel-package-payment').onclick = function(event) {
 	setTimeout(function() {
 		document.getElementById('buy-package-box').style.display = 'none';
 	}, 510);
+}
+
+document.getElementById('buy-btc').onclick = function(event) {
+	document.getElementById('buy-using-btc').style.display="block";
+	setTimeout(function(){
+		document.getElementById('buy-using-btc').classList.add('showing');
+		axios.post('/bitcoin-transaction', {})
+		.then(function (response) {
+			data = response.data.result;
+			document.getElementById('btc-pay-address').src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=" + data.payinAddress;
+			document.getElementById('btc-pay-add').innerHTML = data.payinAddress;
+			document.getElementById('buy-using-btc-preloader').style.display = "none";
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+	}, 10);
+}
+
+document.getElementById('buy-eth').onclick = function(event) {
+	document.getElementById('buy-using-eth').style.display="block";
+	setTimeout(function(){
+		document.getElementById('buy-using-eth').classList.add('showing');
+		axios.post('/ethereum-transaction', {})
+		.then(function (response) {
+			data = response.data.result;
+			document.getElementById('eth-pay-address').src="https://chart.googleapis.com/chart?cht=qr&chs=200x200&chl=" + data.payinAddress;
+			document.getElementById('eth-value').innerHTML = data.amountExpectedFrom.toFixed(4);
+			document.getElementById('eth-pay-add').innerHTML = data.payinAddress;
+			document.getElementById('buy-using-eth-preloader').style.display = "none";
+		})
+		.catch(function (error) {
+			console.log(error);
+		});
+	}, 10);
 }
 
 particlesJS("banner-particles", {"particles":{"number":{"value":6,"density":{"enable":true,"value_area":800}},"color":{"value":"#888888"},"shape":{"type":"circle","stroke":{"width":0,"color":"#000"},"polygon":{"nb_sides":6},"image":{"src":"img/github.svg","width":20,"height":20}},"opacity":{"value":0.3,"random":true,"anim":{"enable":false,"speed":1,"opacity_min":0.1,"sync":false}},"size":{"value":90.75197878771135,"random":false,"anim":{"enable":true,"speed":10,"size_min":40,"sync":false}},"line_linked":{"enable":false,"distance":200,"color":"#ffffff","opacity":1,"width":2},"move":{"enable":true,"speed":8,"direction":"none","random":false,"straight":false,"out_mode":"out","bounce":false,"attract":{"enable":false,"rotateX":600,"rotateY":1200}}},"interactivity":{"detect_on":"canvas","events":{"onhover":{"enable":false,"mode":"grab"},"onclick":{"enable":false,"mode":"push"},"resize":true},"modes":{"grab":{"distance":400,"line_linked":{"opacity":1}},"bubble":{"distance":400,"size":40,"duration":2,"opacity":8,"speed":3},"repulse":{"distance":200,"duration":0.4},"push":{"particles_nb":4},"remove":{"particles_nb":2}}},"retina_detect":true});

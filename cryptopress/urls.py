@@ -14,4 +14,7 @@ urlpatterns = [
 
     path('contact-request', public.contactRequest, name='contact-request'),
     path('package-request', api.packageOrder),
+
+    path('bitcoin-transaction', api.bitcoinTransaction),
+    path('ethereum-transaction', api.ethereumTransaction),
 ]

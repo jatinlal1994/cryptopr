@@ -84,8 +84,12 @@
 								</div>
 							</div>
 						</div>
+						<div class="recaptcha">
+							<div class="g-recaptcha" data-sitekey="6Lfoj5kUAAAAABxtK00W9nXPq39alR2daJ1V7tj8"></div>
+						</div>
 						<p class="quotation-short-desc">Our package will complete all the basic and essential needs for your ICO. The delivery of the services will start within 12 hours of payment.</p>
 						<p id="package-submit-error">Please fill all the fields before submitting</p>
+						<p id="recaptcha-error">Please solve recaptcha first to submit</p>
 						<div class="buy-curr-options">
 							<div class="buy-curr-option">
 								<p id="buy-bitcoin">Pay now</p>
@@ -101,6 +105,42 @@
 	<div id="buy-package-vertical">
 		<div id="buy-package-container">
 			<div id="buy-package-b">
+				<div id="buy-using-btc">
+					<div class="preloader" id="buy-using-btc-preloader">
+						<div class="spinner">
+							<div class="bounce1"></div>
+							<div class="bounce2"></div>
+							<div class="bounce3"></div>
+						</div>
+					</div>
+					<div class="close-payment-modal">
+						<i class="fas fa-times"></i>
+					</div>
+					<p class="payment-request">Please pay 1 BTC to this address</p>
+					<div class="qr-image">
+						<img src="#" id="btc-pay-address">
+					</div>
+					<p class="qr-address" id="btc-pay-add">18ufvR1ga4ousSTwhwQi7W6UpvqvzLuRgf</p>
+					<p class="payment-reference">Please pay to the address presented above. We will contact you soon to the Telegram ID provided by you.</p>
+				</div>
+				<div id="buy-using-eth">
+					<div class="preloader" id="buy-using-eth-preloader">
+						<div class="spinner">
+							<div class="bounce1"></div>
+							<div class="bounce2"></div>
+							<div class="bounce3"></div>
+						</div>
+					</div>
+					<div class="close-payment-modal">
+						<i class="fas fa-times"></i>
+					</div>
+					<p class="payment-request">Please pay <span id="eth-value"></span> ETH to this address</p>
+					<div class="qr-image">
+						<img src="#" id="eth-pay-address">
+					</div>
+					<p class="qr-address" id="eth-pay-add">0x7910943abaef5cf521d5793708b7b558f6ace258</p>
+					<p class="payment-reference">Please pay to the address presented above. We will contact you soon to the Telegram ID provided by you.</p>
+				</div>
 				<p class="buy-package-title">Make payment</p>
 				<p class="buy-package-content" id="buy-package-success"></p>
 				<p class="buy-package-content">You can buy our package with Bitcoin or Ether. The price for our package is 1 BTC. You can pay 1 BTC or equivalent ETH.</p>

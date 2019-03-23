@@ -45,7 +45,7 @@
 								<li v-for="(field, obj) in quotationSteps[currentStep].fields" class="quotation-field" v-bind:data-name="field.id">
 									<div class="field-textarea" v-if="field.type == 'textarea'">
 										<textarea v-model="short_description"></textarea>
-										<label v-bind:data-label="field.label">{% verbatim %}{{  field.label }}{% endverbatim %}</label>
+										<label v-bind:id="field.label" v-bind:data-label="field.label">{% verbatim %}{{  field.label }}{% endverbatim %}</label>
 									</div>
 									<div class="field-checkbox" v-else-if="field.type == 'checkbox'">
 										<input @click="changeCheck" type="checkbox" v-bind:value="field.name" v-bind:id="field.name" v-model="social_medias_selected">
@@ -55,7 +55,7 @@
 										</p>
 									</div>
 									<div v-else>
-										<input v-bind:type="field.type" v-model="values[obj]" />
+										<input v-bind:id="field.name" v-bind:type="field.type" v-model="values[obj]" />
 										<label v-bind:data-label="field.label">{% verbatim %}{{  field.label }}{% endverbatim %}</label>
 									</div>
 								</li>
