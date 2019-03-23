@@ -2,12 +2,10 @@ from django.contrib import admin
 from django.urls import path
 
 from public import views as public
-<<<<<<< HEAD
-test
-=======
 from api import views as api
 
->>>>>>> 4f0c194cd1b57ca03539a44d86f10414add2c4ee
+test
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', public.public, name='home'),
