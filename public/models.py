@@ -38,6 +38,10 @@ class PackageOrder(models.Model):
 	linkedin = models.CharField(max_length = 200)
 	reddit = models.CharField(max_length = 200)
 	youtube = models.CharField(max_length = 200)
+	created_date = models.DateTimeField(auto_now_add=True, null=True)
+	modified_date = models.DateTimeField(auto_now=True, null=True)
+
+	reference = models.CharField(max_length = 100)
 
 	def __str__(self):
 		return self.project_name + " - " + self.token_symbol

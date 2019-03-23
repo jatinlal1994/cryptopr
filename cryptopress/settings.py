@@ -20,6 +20,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -30,11 +31,15 @@ MIDDLEWARE = [
     'htmlmin.middleware.MarkRequestMiddleware',
 ]
 
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+PREPEND_WWW = False
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.privateeemail.com'
-EMAIL_PORT = 465
+EMAIL_PORT = 587
 EMAIL_HOST_USER = 'admin@cryptopr.us'
-EMAIL_HOST_PASSWORD = 'password'
+EMAIL_HOST_PASSWORD = 'komalmaurya'
 
 HTML_MINIFY = True
 
@@ -95,3 +100,5 @@ STATIC_URL = '/dist/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'dist'),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
