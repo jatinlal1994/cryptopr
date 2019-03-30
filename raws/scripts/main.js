@@ -212,7 +212,11 @@
 				{ id: 9, text: 'Payment', step: 'payment', active: false, icon: 'far fa-credit-card', shortDesc: 'We accept payments in Bitcoin and Ethereum. Please pay the decided amount to the below addresses',
 					fields: [
 						{
-							'id': 0, 'name': 'transaction_id', 'model': 'transaction_id', 'type': 'text', 'label': 'Transaction ID',
+							'id': 0,
+							'name': 'transaction_id',
+							'model': 'transaction_id',
+							'type': 'text',
+							'label': 'Transaction ID'
 						}
 					]
 				}
@@ -225,23 +229,35 @@
 				if (ref.$data.currentStep == 0) {
 					console.log("On first step, checking first box");
 					complete = true;
+					
+					document.getElementById('project-name').style.border = "1px solid #eee";
+					document.getElementById('project-website').style.border = "1px solid #eee";
+					document.getElementById('contact-name').style.border = "1px solid #eee";
+					document.getElementById('contact-email').style.border = "1px solid #eee";
+
 					if (document.getElementById('project-name').value == ""){
-						document.getElementById('project-name').style.border = "1px solid red";
+						document.getElementById('project-name').style.border = "1px solid #E74C3C";
 						complete = false;
 					}
 					if (document.getElementById('project-website').value == ""){
-						document.getElementById('project-website').style.border = "1px solid red";
+						document.getElementById('project-website').style.border = "1px solid #E74C3C";
 						complete = false;
 					}
 					if (document.getElementById('contact-name').value == ""){
-						document.getElementById('contact-name').style.border = "1px solid red";
+						document.getElementById('contact-name').style.border = "1px solid #E74C3C";
 						complete = false;
 					}
 					if (document.getElementById('contact-email').value == ""){
-						document.getElementById('contact-email').style.border = "1px solid red";
+						document.getElementById('contact-email').style.border = "1px solid #E74C3C";
 						complete = false;
 					}
-
+				}
+				else if (ref.$data.currentStep == 8){
+					console.log(ref.$data.price);
+					if (ref.$data.price < 1) {
+						alert("Please select at least one service before continuing");
+						moveBack();
+					}
 				}
 				if (complete){
 					if (ref.$data.currentStep < ref.$data.quotationSteps.length - 1){
@@ -320,6 +336,7 @@
 			},
 			submitForm: function(){
 				ref = this;
+				document.getElementById('quotation-loader').style.display = "table";
 				axios.post('/submit-form', {
 					project_name: ref.$data.project_name,
 					project_website: ref.$data.project_website,
@@ -330,10 +347,11 @@
 					fields: ref.$data.social_medias_selected
 				})
 				.then(function (response) {
-					 document.getElementsByClassName('close-modal-button')[0].click();
-					 setTimeout(function(){
-					 	document.getElementById('submitted-form').style.display = "table";
-					 })
+					document.getElementById('quotation-loader').style.display = "none";
+					setTimeout(function(){
+						document.getElementById('submitted-form').style.display = "table";
+						document.getElementsByClassName('close-modal-button')[0].click();
+					}, 100);
 				})
 				.catch(function (error) {
 					console.log(error);

@@ -410,10 +410,11 @@ input{height: 28px;width: 100%;padding: 0 10px;background-color: #f6f6f6;@includ
 	}
 }
 
+
 .recaptcha{
 	div{margin: 18px auto;}
 }
-
+input, button, textarea{-webkit-appearance: none;}
 .close-payment-modal{position: absolute;top: 0;right: 10px;cursor: pointer;}
 .quotation-note, #package-submit-error, #recaptcha-error{color: #E74C3C;font-size: 10.8px;padding: 0 4px;margin-top: 4px;}
 .imp{font-size: 5px;color: #E74C3C;vertical-align: super;margin-left: 2px;}
@@ -484,7 +485,7 @@ input{height: 28px;width: 100%;padding: 0 10px;background-color: #f6f6f6;@includ
 		width: 100%;
 	}
 	#buy-using-bitcoin .buy-container .buy-body .buy-row .buy-col{width: 100%;}
-	#buy-using-bitcoin .buy-container .buy-body{height: calc(100vh - 100px);overflow-y: auto;}
+	#buy-using-bitcoin .buy-container .buy-body{height: 65vh;overflow-y: auto;}
 	#buy-using-bitcoin #quotation-modal-header i{color: #333;}
 	#quotation-modal-header .close-modal-button i{color: #fff;}
 }
