@@ -4,8 +4,6 @@ from django.urls import path
 from public import views as public
 from api import views as api
 
-test
-
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', public.public, name='home'),
