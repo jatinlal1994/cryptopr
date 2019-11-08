@@ -117,7 +117,7 @@
 							'type': 'checkbox',
 							'label': 'Press release on 200+ news websites',
 							'model': 'press_release_200',
-							'price': 2
+							'price': 1
 						},
 						{
 							'id': 1,
@@ -125,7 +125,7 @@
 							'type': 'checkbox',
 							'label': 'Press release on 650+ news websites',
 							'model': 'press_release_650',
-							'price': 3
+							'price': 2
 						},
 						{
 							'id': 2,
@@ -133,7 +133,7 @@
 							'type': 'checkbox',
 							'label': 'Press release on 1800+ news websites',
 							'model': 'press_release_1800',
-							'price': 5
+							'price': 2.5
 						}
 					]
 				},
