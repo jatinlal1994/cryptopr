@@ -514,10 +514,16 @@ if (document.getElementById('scam-notification')) {
 	document.getElementById('close-notification').onclick = function () {
 		document.getElementById('scam-notification').classList.add('closed')
 		document.getElementsByTagName("BODY")[0].style.overflowY = 'auto'
+		setTimeout(function () {
+			document.getElementById('scam-notification').style.display = "none";
+		}, 500);
 	}
 	document.getElementById('close-scam-notification').onclick = function () {
 		document.getElementById('scam-notification').classList.add('closed')
 		document.getElementsByTagName("BODY")[0].style.overflowY = 'auto'
+		setTimeout(function () {
+			document.getElementById('scam-notification').style.display = "none";
+		}, 500);
 	}
 }
 
