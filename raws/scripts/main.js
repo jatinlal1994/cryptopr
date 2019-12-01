@@ -229,7 +229,7 @@
 				if (ref.$data.currentStep == 0) {
 					console.log("On first step, checking first box");
 					complete = true;
-					
+
 					document.getElementById('project-name').style.border = "1px solid #eee";
 					document.getElementById('project-website').style.border = "1px solid #eee";
 					document.getElementById('contact-name').style.border = "1px solid #eee";
@@ -289,7 +289,7 @@
 							ref.$data.prev = false;
 						}
 						ref.$data.quotationSteps[ref.$data.currentStep].active = true;
-						ref.$data.quotationSteps[ref.$data.currentStep + 1].active = false;	
+						ref.$data.quotationSteps[ref.$data.currentStep + 1].active = false;
 						target.classList.remove('changing');
 					}, 250);
 				}
@@ -363,7 +363,7 @@
 )();
 
 document.getElementById('buy-btc').onclick = function(event) {
-	
+
 }
 
 document.getElementById('close-quotation-success').onclick = function(event){
@@ -406,7 +406,7 @@ window.onscroll = function(event) {
 		document.getElementById('scroll-to-top').classList.add('hidden');
 	}
 	else{
-		document.getElementById('scroll-to-top').classList.remove('hidden');		
+		document.getElementById('scroll-to-top').classList.remove('hidden');
 	}
 }
 
@@ -467,7 +467,7 @@ document.getElementById('buy-bitcoin').onclick = function(event) {
 			});
 		}
 
-		
+
 	}
 	else {
 		document.getElementById('package-submit-error').style.display = "block";
@@ -507,6 +507,18 @@ document.getElementById('buy-btc').onclick = function(event) {
 			console.log(error);
 		});
 	}, 10);
+}
+
+document.getElementsByTagName("BODY")[0].style.overflowY = 'hidden';
+if (document.getElementById('scam-notification')) {
+	document.getElementById('close-notification').onclick = function () {
+		document.getElementById('scam-notification').classList.add('closed')
+		document.getElementsByTagName("BODY")[0].style.overflowY = 'auto'
+	}
+	document.getElementById('close-scam-notification').onclick = function () {
+		document.getElementById('scam-notification').classList.add('closed')
+		document.getElementsByTagName("BODY")[0].style.overflowY = 'auto'
+	}
 }
 
 document.getElementById('buy-eth').onclick = function(event) {

@@ -287,7 +287,7 @@ input{height: 28px;width: 100%;padding: 0 10px;background-color: #f6f6f6;@includ
 	#submitted-form-vertical{display: table-cell;vertical-align: middle;
 		#submitted-form-container{width: calc(100% - 30px);margin: 0 auto;max-width: 420px;
 			#submitted-form-header{position: relative;
-				background-color: $primary-color;padding: 0 8px; 
+				background-color: $primary-color;padding: 0 8px;
 				p{color: #fff;font-size: 12px;font-weight: 400;line-height: 24px;}
 				#close-quotation-success{position: absolute;top: -2px;right: 8px;cursor: pointer;
 					i{font-size: 17px;color: #fff;}
@@ -423,6 +423,38 @@ input, button, textarea{-webkit-appearance: none;}
 #package-submit-error, #recaptcha-error{text-align: center;display: none;}
 
 #buy-preloader{position: absolute;top: calc(50% - 12.5px);left: calc(50% - 35px);display: none;}
+
+#scam-notification{position: fixed;top: 0;left: 0;width: 100vw;height: 100vh;z-index: 20;background-color: rgba(0,0,0,0.5);display: table;@include opacity(1);transition: 500ms;
+	#scam-notification-vertical{display: table-cell;vertical-align: middle;
+		#scam-notification-container{width: 100%;padding: 0 15px;box-sizing: border-box;max-width: 450px;margin: 0 auto;
+			#scam-notification-box{background-color: #fff;padding: 20px 20px 25px 20px;box-sizing: border-box;border-radius: 4px;transform: translateY(0vh);transition: 500ms;
+				#close-scam-notification{cursor: pointer;}
+			}
+			.scam-notification-header{position: relative;
+				p{font-size: 34px;color: #E74C3C;text-align: center;font-weight: bold;}
+				#close-notification{position: absolute;top: -8px;right: -5px;cursor: pointer;
+					i{font-size: 18px;transition: 150ms;}
+					&:hover{
+						i{color: #777;}
+					}
+				}
+			}
+			.scam-notification-body{margin-top: 15px;
+				.scam-notification-inner{
+					p{font-size: 12px;font-weight: bold;
+						a{color: #3498DB;}
+					}
+				}
+				.scam-notification-close{text-align: right;margin-top: 20px;
+					p{display: inline;font-size: 12.5px;padding: 8px 15px;background-color: #2c2c54;color: #fff;border-radius: 5px;font-weight: bold;}
+				}
+			}
+		}
+	}
+	&.closed{@include opacity(0);
+		#scam-notification-vertical #scam-notification-container #scam-notification-box{transform: translateY(-4vh);}
+	}
+}
 
 @media (max-width: 768px) {
 	.container{width: 100%;padding-left: 15px;padding-right: 15px;@include box-sizing(border-box);}
