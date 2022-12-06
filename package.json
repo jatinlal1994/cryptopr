@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "particlesjs": "^2.2.3",
-    "qs": "^6.6.0",
+    "qs": "^6.6.1",
     "vue": "^2.5.22",
     "webpack": "^4.29.0",
     "webpack-obfuscator": "^0.18.0"
